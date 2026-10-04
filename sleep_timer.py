@@ -14,13 +14,13 @@ def sleep_system() -> None:
     """Put the Windows machine to sleep (standby)."""
     # SetSuspendState(bHibernate, bForce, bWakeupEventsDisabled)
     # bHibernate=False -> sleep, True -> hibernate
-    result = ctypes.windll.powrprof.SetSuspendState(0, 1, 0)
+    result = ctypes.windll.powrprof.SetSuspendState(0, 0, 0)
     if result == 0:
         # Fallback in case SetSuspendState fails
         import subprocess
 
         subprocess.run(
-            ["rundll32.exe", "powrprof.dll,SetSuspendState", "0,1,0"],
+            ["rundll32.exe", "powrprof.dll,SetSuspendState", "0,0,0"],
             check=False,
         )
 
